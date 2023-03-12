@@ -1,6 +1,8 @@
 from django.apps import AppConfig
-from django.conf import settings
-from currency.models import Currency
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class CurrencyConfig(AppConfig):
@@ -8,7 +10,18 @@ class CurrencyConfig(AppConfig):
     name = 'currency'
 
     def ready(self):
-        for currency_code in settings.CURRENCY_CODES:
-            Currency.objects.get_or_create(
-                code=currency_code
-            )
+        from django.conf import settings
+        from currency.models import Currency
+        try:
+            for currency_code in settings.CURRENCY_CODES:
+                _, created = Currency.objects.get_or_create(
+                    code=currency_code
+                )
+                if created:
+                    logger.info("Currency code " +
+                                currency_code + " created")
+        except Exception as ex:
+            if type(ex).__name__ == "OperationalError" \
+                    and 'no such table: currency_currency' in ex.args:
+                return
+            raise ex
