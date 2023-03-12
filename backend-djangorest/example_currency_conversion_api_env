@@ -1,0 +1,3 @@
+APP_ALLOWED_HOSTS=localhost
+DATABASE_URL=postgres://pguser:password@db:32500/currency_conversion_api
+CURRENCY_CODES=USD,EUR,CAD

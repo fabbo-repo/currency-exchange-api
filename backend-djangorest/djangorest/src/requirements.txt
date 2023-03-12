@@ -1,0 +1,21 @@
+django==4.1.7
+# Rest framework
+djangorestframework==3.13.1
+# Environment variables library
+django-environ==0.9.0
+# Multiple configurations inside one setting
+django-configurations[cache,database,email,search]==2.3.2
+# Filtering by url
+django-filter==22.1
+# Cors
+django-cors-headers==3.13.0
+# Swagger
+drf-yasg==1.21.3
+# Postgres driver
+psycopg2-binary==2.9.5
+# Testing coverage
+coverage==6.4.4
+# Web scrapping
+beautifulsoup4==4.11.1
+# Web server
+gunicorn==20.1.0
