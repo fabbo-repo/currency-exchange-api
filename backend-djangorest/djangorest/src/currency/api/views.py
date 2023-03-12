@@ -5,14 +5,16 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework.permissions import AllowAny
+from django.views.decorators.vary import vary_on_headers
+from api_key.permissions import HasAPIKey
 
 
 class CurrencyRetrieveView(generics.RetrieveAPIView):
     queryset = Currency.objects.all()
-    permission_classes = (AllowAny,)
     serializer_class = CurrencySerializer
 
     @method_decorator(cache_page(12 * 60 * 60))
+    @method_decorator(vary_on_headers("Authorization"))
     def get(self, request, *args, **kwargs):
         """
         This view will be cached for 12 hours
@@ -22,10 +24,10 @@ class CurrencyRetrieveView(generics.RetrieveAPIView):
 
 class CurrencyListView(generics.ListAPIView):
     queryset = Currency.objects.all()
-    permission_classes = (AllowAny,)
     serializer_class = CurrencySerializer
 
     @method_decorator(cache_page(12 * 60 * 60))
+    @method_decorator(vary_on_headers("Authorization"))
     def get(self, request, *args, **kwargs):
         """
         This view will be cached for 12 hours

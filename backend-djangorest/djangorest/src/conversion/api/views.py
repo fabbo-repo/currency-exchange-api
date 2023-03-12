@@ -5,11 +5,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from rest_framework.permissions import AllowAny
 
 
 class ConversionRetrieveView(APIView):
-    permission_classes = (AllowAny,)
 
     def get(self, request, code, format=None):
         last_conversion = Conversion.objects.last()
@@ -39,7 +37,6 @@ class ConversionRetrieveView(APIView):
 
 
 class ConversionListView(APIView):
-    permission_classes = (AllowAny,)
 
     def get(self, request, days, format=None):
         if days < 1:

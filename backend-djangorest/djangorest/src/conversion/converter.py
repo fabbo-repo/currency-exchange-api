@@ -2,6 +2,9 @@ import logging
 import requests
 from django.conf import settings
 from bs4 import BeautifulSoup
+from conversion.models import Conversion
+from django.utils import timezone
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +22,7 @@ class CurrencyData:
         return float(self.data[currency_from][currency_to]) * amount
 
 
-class CurrencyConverterService:
+class CurrencyConversionService:
 
     def make_conversions(reference_currency_code, ammount=1):
         res = {
@@ -29,41 +32,52 @@ class CurrencyConverterService:
             # Ignore reference_currency_code
             if code == reference_currency_code:
                 continue
-            res[code] = CurrencyConverterService.make_conversion(
+            res[code] = CurrencyConversionService.make_conversion(
                 reference_currency_code, code, ammount)
         return res
 
-    def make_conversion(code_from, code_to, ammount=1):
+    def make_conversion(currency_from, currency_to, ammount=1):
+        last_conversion = Conversion.objects.last()
+        if last_conversion.created > timezone.now() - timezone.timedelta(hours=1):
+            return CurrencyConversionService.get_currency_data_from_conversion(last_conversion).convert(currency_from, currency_to, ammount)
+        return CurrencyConversionService.request_conversion(currency_from, currency_to, ammount)
+
+    def request_conversion(currency_from, currency_to, ammount=1):
         params = {}
         params["Amount"] = ammount
-        params["From"] = code_from
-        params["To"] = code_to
+        params["From"] = currency_from
+        params["To"] = currency_to
         resp = requests.get(CURRENCY_CONVERTER_URL, params=params)
         try:
             resp.raise_for_status()
         except:
             logger.error(
-                '[CURRENCY CONVERTER] currency converter connection error')
+                'Currency converter connection error')
             raise ConnectionError()
         html = resp.content
-        return CurrencyConverterService.filter_html_response(html)
+        return CurrencyConversionService.filter_html_response(html)
 
     def filter_html_response(html):
         soup = BeautifulSoup(html, 'html.parser')
         try:
             return float(soup.body.find_all('p')[3].text.split(' ')[3])
         except:
-            logger.error('[CURRENCY CONVERTER] html parser no longer valid')
+            logger.error('Html parser no longer valid')
             raise Exception('html parser no longer valid')
 
     def get_currency_data():
-        logger.info("[CURRENCY CONVERTER] Fetching currency data")
+        logger.info("Fetching currency data")
         res = {}
         for code in settings.CURRENCY_CODES:
-            data = CurrencyConverterService.make_conversions(code)
+            data = CurrencyConversionService.make_conversions(code)
             data.pop(code)
             res[code] = data
         return CurrencyData(res)
 
-    def get_currency_data_from_json(self, data):
+    def get_currency_data_from_json(data):
+        return CurrencyData(data)
+
+    def get_currency_data_from_conversion(conversion: Conversion):
+        conversion_data = conversion.conversion_data
+        data = json.loads(conversion_data)
         return CurrencyData(data)

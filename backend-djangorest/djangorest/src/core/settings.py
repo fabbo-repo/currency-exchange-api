@@ -14,6 +14,7 @@ env = environ.Env(
     APP_CORS_HOSTS=(str, os.getenv("APP_CORS_HOSTS")),
     DATABASE_URL=(str, os.getenv("DATABASE_URL",
                                  default='sqlite:///'+os.path.join(BASE_DIR, 'default.sqlite3'))),
+    DEFAULT_API_KEY=(str, os.getenv("DEFAULT_API_KEY", default="")),
     CURRENCY_CODES=(str, os.getenv("CURRENCY_CODES", default='EUR,USD')),
 )
 
@@ -52,8 +53,8 @@ class Dev(Configuration):
         'drf_yasg',
         # Custom apps:
         'core',
-        'currency',
         'conversion',
+        'currency',
         'api_key'
     ]
 
@@ -128,6 +129,12 @@ class Dev(Configuration):
     # Datetimes will be timezone-aware
     USE_TZ = True
 
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/4.1/howto/static-files/
+    # (Statis url is not used in this project)
+    STATIC_URL = 'static/'
+    STATIC_ROOT = BASE_DIR / "static"
+
     # Default primary key field type
     # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -153,14 +160,11 @@ class Dev(Configuration):
             "level": "DEBUG",
         }
     }
-
+    
     # Django Rest Framework setting:
     REST_FRAMEWORK = {
-        "DEFAULT_AUTHENTICATION_CLASSES": [
-            "rest_framework_simplejwt.authentication.JWTAuthentication"
-        ],
         "DEFAULT_PERMISSION_CLASSES": [
-            "rest_framework.permissions.IsAuthenticated",
+            "api_key.permissions.HasAPIKey"
         ],
         "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
         "PAGE_SIZE": 10,
@@ -179,7 +183,7 @@ class Dev(Configuration):
 
     SWAGGER_SETTINGS = {
         "SECURITY_DEFINITIONS": {
-            "Bearer": {
+            "API Key": {
                 "type": "apiKey",
                 "name": "Authorization",
                 "in": "header"
@@ -188,6 +192,7 @@ class Dev(Configuration):
     }
 
     CURRENCY_CODES = env('CURRENCY_CODES').split(',')
+    DEFAULT_API_KEY = env('DEFAULT_API_KEY')
 
 
 class OnPremise(Dev):
