@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from currency.models import Currency
 from django.utils.translation import gettext_lazy as _
 
 
@@ -10,23 +11,25 @@ class Conversion(models.Model):
         default=uuid.uuid4,
         editable=False
     )
-    # Json for conversion data parsed to string
-    # To save it:
-    # currencyX.conversion_data = json.dumps(data)
-    # To retrive it:
-    # json.loads(currencyX.conversion_data)
-    # Note: Every key and value would have type str
-    conversion_data = models.TextField(
-        verbose_name=_('data conversion dictionary'),
-        default='{}'
+    currency_from = models.ForeignKey(
+        Currency,
+        verbose_name=_('currency from')
     )
-    created = models.DateTimeField(auto_now_add=True)
+    currency_to = models.ForeignKey(
+        Currency,
+        verbose_name=_('currency to')
+    )
+    conversion_value = models.FloatField(
+        verbose_name=_('conversion value'),
+        default=0
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = _('Currency conversion')
         verbose_name_plural = _('Currency conversions')
         # Greater to lower date
-        ordering = ['-created']
+        ordering = ['-created_at']
 
     def __str__(self) -> str:
-        return str(self.created)
+        return str(self.created_at)
