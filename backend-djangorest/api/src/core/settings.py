@@ -16,6 +16,8 @@ env = environ.Env(
                                  default='sqlite:///'+os.path.join(BASE_DIR, 'default.sqlite3'))),
     DEFAULT_API_KEY=(str, os.getenv("DEFAULT_API_KEY", default="")),
     CURRENCY_CODES=(str, os.getenv("CURRENCY_CODES", default='EUR,USD')),
+    MAX_STORED_DAYS=(int, os.getenv("MAX_STORED_DAYS", default=20)),
+    MAX_NO_UPDATED_MINS=(int, os.getenv("MAX_NO_UPDATED_MINS", default=60)),
 )
 
 
@@ -49,6 +51,8 @@ class Dev(Configuration):
         # Rest framework:
         'rest_framework',
         'django_filters',
+        # Cron jobs:
+        'django_crontab',
         # Swager:
         'drf_yasg',
         # Custom apps:
@@ -160,7 +164,7 @@ class Dev(Configuration):
             "level": "DEBUG",
         }
     }
-    
+
     # Django Rest Framework setting:
     REST_FRAMEWORK = {
         "DEFAULT_PERMISSION_CLASSES": [
@@ -191,8 +195,19 @@ class Dev(Configuration):
         }
     }
 
+    # Cron jobs (https://crontab.guru/)
+    CRONJOBS = [
+        ('0 */6 * * *', 'conversion.cron.update_currency_conversion')
+    ]
+
+    # Currency conversion settings
+
     CURRENCY_CODES = env('CURRENCY_CODES').split(',')
     DEFAULT_API_KEY = env('DEFAULT_API_KEY')
+    # Maximum number of days to store a conversion
+    MAX_STORED_DAYS = env('MAX_STORED_DAYS')
+    # Maximum number of minutes to avoid updating a conversion
+    MAX_NO_UPDATED_MINS = env('MAX_NO_UPDATED_MINS')
 
 
 class OnPremise(Dev):

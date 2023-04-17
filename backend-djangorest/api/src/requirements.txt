@@ -4,7 +4,9 @@ djangorestframework==3.13.1
 # Environment variables library
 django-environ==0.9.0
 # Multiple configurations inside one setting
-django-configurations[cache,database,email,search]==2.3.2
+django-configurations==2.3.2
+# Django cron jobs
+django-crontab==0.7.1
 # Filtering by url
 django-filter==22.1
 # Cors

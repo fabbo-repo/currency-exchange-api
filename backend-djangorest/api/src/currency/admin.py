@@ -4,9 +4,6 @@ from currency.models import Currency
 
 @admin.register(Currency)
 class CurrencyAdmin(admin.ModelAdmin):
-    fields = [
-        'code'
-    ]
 
     # This will help disbale add functionality
     def has_add_permission(self, request):

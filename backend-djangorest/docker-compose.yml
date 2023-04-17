@@ -29,8 +29,7 @@ services:
     volumes:
       - ./database:/var/lib/postgresql/data
     networks:
-      currency_conversion_api_net:
-        ipv4_address: 192.168.10.20
+      - currency_conversion_api_net
 
   pgadmin:
     image: dpage/pgadmin4:6.20
@@ -42,7 +41,7 @@ services:
       - db
     restart: unless-stopped
     networks:
-      currency_conversion_api_net:
+      - currency_conversion_api_net
 
 networks:
   currency_conversion_api_net:

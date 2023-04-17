@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.db.utils import OperationalError
 import logging
 
 
@@ -15,16 +16,12 @@ class ApiKeyConfig(AppConfig):
         try:
             if settings.DEFAULT_API_KEY:
                 api_key, _ = APIKey.objects.update_or_create(
-                    code = settings.DEFAULT_API_KEY,
-                    is_active = True
+                    code=settings.DEFAULT_API_KEY,
+                    is_active=True
                 )
             if not len(APIKey.objects.all()):
                 api_key = APIKey.objects.create()
             else:
                 api_key = APIKey.objects.filter(is_active=True).last()
             logger.info("API key: " + str(api_key))
-        except Exception as ex:
-            if type(ex).__name__ == "OperationalError" \
-                    and 'no such table: api_key_apikey' in ex.args:
-                return
-            raise ex
+        except OperationalError: pass
