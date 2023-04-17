@@ -1,5 +1,18 @@
 # DRF API
 
+## Environment Variables
+
+| NAME                      | DESCRIPTION                                                |
+| ------------------------- | ---------------------------------------------------------- |
+| APP_DEBUG                 | Debug mode enabled (true|false)                            |
+| APP_ALLOWED_HOSTS         | List of strings representing the allowed host/domain names |
+| APP_CORS_HOSTS            | CORS allowed host/domain names                             |
+| DATABASE_URL              | Databse url                                                |
+| DEFAULT_API_KEY           | Default value for API Key (uuid)                           |
+| CURRENCY_CODES            | Currency codes allowed (they have to be valid)             |
+| MAX_STORED_DAYS           | Max number of days without removing conversions            |
+| MAX_NO_UPDATED_MINS       | Max number of minutos without fetching new conversions     |
+
 ## Architecture diagram
 
 ![Alt text](./diagrams/architecture.png?raw=true "")
@@ -76,16 +89,6 @@ djangorest/
     ├── manage.py
     └── db.sqlite3
 ~~~
-
-## Environment Variables
-
-| NAME                      | DESCRIPTION                                                |
-| ------------------------- | ---------------------------------------------------------- |
-| APP_DEBUG                 | Debug mode enabled (true|false)                            |
-| APP_ALLOWED_HOSTS         | List of strings representing the allowed host/domain names |
-| APP_CORS_HOSTS            | CORS allowed host/domain names                             |
-| DATABASE_URL              | Databse url                                                |
-| CURRENCY_CODES            | Currency codes allowed (they have to be valid)             |
 
 ## Useful commands
 
