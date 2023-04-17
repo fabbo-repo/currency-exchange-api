@@ -13,7 +13,7 @@ CURRENCY_CONVERTER_URL = "https://www.xe.com/currencyconverter/convert/"
 
 class CurrencyConversionService:
 
-    def make_conversions(reference_currency_code, ammount=1):
+    def make_conversions(reference_currency_code, ammount=1) -> dict:
         res = {
             reference_currency_code: ammount
         }
@@ -25,7 +25,7 @@ class CurrencyConversionService:
                 reference_currency_code, code, ammount)
         return res
 
-    def make_conversion(currency_from: str, currency_to: str, ammount=1):
+    def make_conversion(currency_from: str, currency_to: str, ammount=1) -> float:
         if currency_from == currency_to:
             return ammount
         last_conversion = Conversion.objects.filter(
@@ -34,13 +34,13 @@ class CurrencyConversionService:
         )
         if last_conversion.exists():
             last_conversion = last_conversion.last()
-            if last_conversion.created_at > timezone.now() - timezone.timedelta(minutes=last_conversion.MAX_NO_UPDATED_MINS):
+            if last_conversion.created_at > timezone.now() - timezone.timedelta(minutes=settings.MAX_NO_UPDATED_MINS):
                 conversion_value = last_conversion.conversion_value
-                if last_conversion.created_at < timezone.now() - timezone.timedelta(days=last_conversion.MAX_STORED_DAYS):
+                if last_conversion.created_at < timezone.now() - timezone.timedelta(days=settings.MAX_STORED_DAYS):
                     last_conversion.delete()
-                return round(conversion_value * ammount, 2)
+                return conversion_value * ammount
             else:
-                if last_conversion.created_at < timezone.now() - timezone.timedelta(days=last_conversion.MAX_STORED_DAYS):
+                if last_conversion.created_at < timezone.now() - timezone.timedelta(days=settings.MAX_STORED_DAYS):
                     last_conversion.delete()
         requestd_conersion = CurrencyConversionService._request_conversion(
             currency_from, currency_to, 1)
@@ -49,7 +49,7 @@ class CurrencyConversionService:
             currency_to=Currency.objects.get(code=currency_to),
             conversion_value=requestd_conersion
         )
-        return round(requestd_conersion * ammount, 2)
+        return requestd_conersion * ammount
 
     def _request_conversion(currency_from, currency_to, ammount=1) -> float:
         params = {}

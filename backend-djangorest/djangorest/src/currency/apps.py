@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.db.utils import OperationalError
 import logging
 
 
@@ -20,8 +21,7 @@ class CurrencyConfig(AppConfig):
                 if created:
                     logger.info("Currency code " +
                                 currency_code + " created")
-        except Exception as ex:
-            if type(ex).__name__ == "OperationalError" \
-                    and 'no such table: currency_currency' in ex.args:
-                return
-            raise ex
+            # Once currency codes are created, then conversions can be fetched
+            from conversion.cron import update_currency_conversion
+            update_currency_conversion()
+        except OperationalError: pass

@@ -51,6 +51,8 @@ class Dev(Configuration):
         # Rest framework:
         'rest_framework',
         'django_filters',
+        # Cron jobs:
+        'django_crontab',
         # Swager:
         'drf_yasg',
         # Custom apps:
@@ -192,6 +194,11 @@ class Dev(Configuration):
             },
         }
     }
+
+    # Cron jobs (https://crontab.guru/)
+    CRONJOBS = [
+        ('0 */6 * * *', 'conversion.cron.update_currency_conversion')
+    ]
 
     # Currency conversion settings
 
