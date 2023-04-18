@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-09 17:50+0100\n"
+"POT-Creation-Date: 2023-04-18 11:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,3 +17,67 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\api_key\models.py:8
+msgid "uuid code"
+msgstr "uuid code"
+
+#: .\api_key\models.py:14
+msgid "is active"
+msgstr "is active"
+
+#: .\api_key\models.py:21
+msgid "API key"
+msgstr "API key"
+
+#: .\api_key\models.py:22
+msgid "API keys"
+msgstr "API keys"
+
+#: .\conversion\exceptions.py:12
+msgid "{} code not supported"
+msgstr "{} code not supported"
+
+#: .\conversion\exceptions.py:18
+msgid "Too many days, maximum is {}"
+msgstr "Too many days, maximum is {}"
+
+#: .\conversion\models.py:9
+msgid "uuid"
+msgstr "uuid"
+
+#: .\conversion\models.py:16
+msgid "currency from"
+msgstr "currency from"
+
+#: .\conversion\models.py:22
+msgid "currency to"
+msgstr "currency to"
+
+#: .\conversion\models.py:27
+msgid "conversion value"
+msgstr "conversion value"
+
+#: .\conversion\models.py:33
+msgid "Currency conversion"
+msgstr "Currency conversion"
+
+#: .\conversion\models.py:34
+msgid "Currency conversions"
+msgstr "Currency conversion"
+
+#: .\core\settings.py:125
+msgid "English"
+msgstr "English"
+
+#: .\core\settings.py:126
+msgid "Spanish"
+msgstr "Spanish"
+
+#: .\currency\models.py:7
+msgid "code"
+msgstr "code"
+
+#: .\currency\models.py:13 .\currency\models.py:14
+msgid "Currency"
+msgstr "Currency"

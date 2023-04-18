@@ -183,6 +183,7 @@ class Dev(Configuration):
             "anon": "300/minute",
             "user": "300/minute",
         },
+        'EXCEPTION_HANDLER': 'core.exceptions.app_exception_handler'
     }
 
     SWAGGER_SETTINGS = {

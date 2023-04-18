@@ -1,23 +1,19 @@
-import json
 from conversion.models import Conversion
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
 from conversion.converter import CurrencyConversionService
+from conversion.exceptions import TooManyDaysException, CodeNotSupportedException
 
 
 class ConversionRetrieveView(APIView):
 
     def get(self, request, code, format=None):
         if code not in settings.CURRENCY_CODES:
-            return Response(
-                data={"detail": _("{} code not supported").format(code)},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            raise CodeNotSupportedException(code)
         conversions_dict = CurrencyConversionService.make_conversions(code)
         return Response(
             data={
@@ -38,10 +34,7 @@ class ConversionDaysListView(APIView):
         if days < 1:
             return Response(data=[])
         if days > settings.MAX_STORED_DAYS:
-            raise ValidationError(
-                detail=_("Too many days, maximum is {}")
-                .format(settings.MAX_STORED_DAYS)
-            )
+            raise TooManyDaysException()
         filtered_conversions = Conversion.objects.filter(
             created_at__lte=timezone.now(),
             created_at__gt=timezone.now() - timezone.timedelta(days=days)
