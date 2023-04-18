@@ -13,9 +13,12 @@
 | MAX_STORED_DAYS           | Max number of days without removing conversions            |
 | MAX_NO_UPDATED_MINS       | Max number of minutos without fetching new conversions     |
 
-## Architecture diagram
+## Error Codes
 
-![Alt text](./diagrams/architecture.png?raw=true "")
+| CODE              | DEFINITION                                                 | ENDPOINT                       |
+| ----------------- | ---------------------------------------------------------- | ------------------------------ |
+| 1                 | Currency code not supported                                | /conversion/{code}             |
+| 2                 | Too many days to fetch conversions                         | /conversion/days/{days}        |
 
 ## Directory tree example
 
@@ -56,6 +59,7 @@ djangorest/
     │   ├── filters.py
     │   ├── notifications.py
     │   ├── apps.py
+    │   ├── exceptions.py
     │   └── admin.py
     ├── ...
     ├── app_2/
@@ -79,6 +83,7 @@ djangorest/
     │   ├── settings.py
     │   ├── urls.py
     │   ├── api_urls.py
+    │   ├── exceptions.py
     │   └── wsgi.py
     ├── templates/
     │   └── ... (This is optional)
