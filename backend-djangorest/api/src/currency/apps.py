@@ -24,4 +24,4 @@ class CurrencyConfig(AppConfig):
             # Once currency codes are created, then conversions can be fetched
             from conversion.cron import update_currency_conversion
             update_currency_conversion()
-        except OperationalError: pass
+        except Exception: pass
