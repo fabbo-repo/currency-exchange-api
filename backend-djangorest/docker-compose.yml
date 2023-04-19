@@ -3,9 +3,7 @@ version: '3'
 services:
 
   api:
-    build:
-      context: djangorest
-      dockerfile: Dockerfile
+    image: fabbo/currency-conversion-api-djangorest
     env_file:
       - ./currency_conversion_api.env
     volumes:
@@ -20,7 +18,7 @@ services:
       - currency_conversion_api_net
 
   db:
-    image: postgres:15.1
+    image: postgres
     env_file:
       - ./postgres_db.env
     ports:
@@ -32,7 +30,7 @@ services:
       - currency_conversion_api_net
 
   pgadmin:
-    image: dpage/pgadmin4:6.20
+    image: dpage/pgadmin4
     env_file:
       - ./pgadmin.env
     ports:
