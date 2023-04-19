@@ -19,8 +19,8 @@ RUN pip install poetry
 # Copy dependency files
 # To generate poetry files:
 # cat requirements.txt | xargs -I % sh -c 'poetry add "%"'
-COPY pyproject.toml /
-COPY poetry.lock /
+COPY src/pyproject.toml /
+COPY src/poetry.lock /
 #COPY src/requirements.txt /
 
 # Create requirements.txt file
