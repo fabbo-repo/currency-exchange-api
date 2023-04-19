@@ -9,28 +9,26 @@ RUN set -ex \
     && BUILD_DEPS=" \
     gettext \
     postgresql-client \
+    python3-poetry \
     " \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Poetry
-#RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/etc/poetry python3 -
-#ENV PATH="/etc/poetry:${PATH}"
-
 # Copy dependency files
-#COPY pyproject.toml /
-#COPY poetry.lock /
-COPY src/requirements.txt /
+# To generate poetry files:
+# cat requirements.txt | xargs -I % sh -c 'poetry add "%"'
+COPY pyproject.toml /
+COPY poetry.lock /
+#COPY src/requirements.txt /
 
-# Add dependencies from requirements
-#RUN cat requirements.txt | xargs poetry add
-#RUN poetry lock
+# Create requirements.txt file
+RUN poetry export -f requirements.txt --output /requirements.txt
+
 # Install dependencies
-#RUN poetry install
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /requirements.txt
-    
+
 ENV PATH="/py/bin:$PATH"
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
