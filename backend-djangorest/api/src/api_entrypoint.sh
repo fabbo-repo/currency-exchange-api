@@ -15,6 +15,9 @@ done
 touch /var/log/api/app.log
 chmod 777 /var/log/api/app.log
 
+# Check migrations
+python manage.py migrate --check || python manage.py migrate --no-input
+
 # https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
 cat << "EOF"
 
