@@ -50,7 +50,7 @@ jobs:
           docker push ${IMAGE_TAG}
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          REPO_NAME: ${{ github.repository.name }}
+          REPO_NAME: ${{ secrets.DOCKER_REPO_NAME }}
         working-directory: ./backend-djangorest/api
 
       - name: Create Release
