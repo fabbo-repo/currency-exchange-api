@@ -9,10 +9,12 @@ RUN set -ex \
     && BUILD_DEPS=" \
     gettext \
     postgresql-client \
-    python3-poetry \
     " \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
+
+# Install poetry
+RUN curl -sSL https://install.python-poetry.org | python -
 
 # Copy dependency files
 # To generate poetry files:
