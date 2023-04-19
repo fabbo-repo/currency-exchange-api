@@ -24,4 +24,4 @@ class ApiKeyConfig(AppConfig):
             else:
                 api_key = APIKey.objects.filter(is_active=True).last()
             logger.info("API key: " + str(api_key))
-        except OperationalError: pass
+        except Exception: pass
