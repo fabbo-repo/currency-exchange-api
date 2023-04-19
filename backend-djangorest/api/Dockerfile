@@ -14,7 +14,7 @@ RUN set -ex \
     && rm -rf /var/lib/apt/lists/*
 
 # Install poetry
-RUN curl -sSL https://install.python-poetry.org | python -
+RUN pip install poetry
 
 # Copy dependency files
 # To generate poetry files:

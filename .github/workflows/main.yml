@@ -43,7 +43,6 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          cat src/pyproject.toml
           export APP_VERSION=$(grep -m 1 version src/pyproject.toml | tr -d '=' | cut -d' ' -f3 | tr -d '"' | tr -d '\n' | tr -d '\r')
           echo "Using version ${APP_VERSION}"
           IMAGE_TAG="${DOCKER_USERNAME}/${REPO_NAME}:${APP_VERSION}"
