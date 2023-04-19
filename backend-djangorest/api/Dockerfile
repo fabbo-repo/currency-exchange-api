@@ -9,6 +9,7 @@ RUN set -ex \
     && BUILD_DEPS=" \
     gettext \
     postgresql-client \
+    cron \
     " \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
