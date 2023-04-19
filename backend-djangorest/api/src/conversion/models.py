@@ -15,13 +15,13 @@ class Conversion(models.Model):
         Currency,
         verbose_name=_('currency from'),
         related_name="%(app_label)s_%(class)s_from",
-        on_delete = models.CASCADE
+        on_delete=models.CASCADE
     )
     currency_to = models.ForeignKey(
         Currency,
         verbose_name=_('currency to'),
         related_name="%(app_label)s_%(class)s_to",
-        on_delete = models.CASCADE
+        on_delete=models.CASCADE
     )
     conversion_value = models.FloatField(
         verbose_name=_('conversion value'),
