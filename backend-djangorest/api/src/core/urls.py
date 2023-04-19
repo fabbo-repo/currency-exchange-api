@@ -1,9 +1,7 @@
-from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from core.swagger import urls as swagger_urls
 from core import api_urls
-from django.conf.urls.static import static
 
 handler404 = 'core.views.not_found_view'
 handler500 = 'core.views.error_view'

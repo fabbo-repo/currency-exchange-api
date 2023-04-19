@@ -48,9 +48,6 @@ EXPOSE 8000
 # Log directory:
 RUN mkdir -p /var/log/api
 
-# Make migrations
-RUN python manage.py makemigrations
-
 # Compile translations
 RUN django-admin compilemessages --ignore=env
 

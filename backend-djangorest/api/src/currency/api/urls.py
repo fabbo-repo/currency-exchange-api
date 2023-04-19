@@ -6,6 +6,6 @@ from currency.api.views import (
 
 
 urlpatterns = [
-    path("currency/<str:pk>", CurrencyRetrieveView.as_view(), name='coin_type_get'),
-    path("currency", CurrencyListView.as_view(), name='coin_type_list'),
+    path("currency/<str:pk>", CurrencyRetrieveView.as_view(), name='currency-get'),
+    path("currency", CurrencyListView.as_view(), name='currency-list'),
 ]

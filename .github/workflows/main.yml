@@ -27,7 +27,7 @@ jobs:
 
       - name: Run tests
         run: |
-          poetry run python manage.py test || true 
+          poetry run python manage.py test
         working-directory: ./backend-djangorest/api/src
       
       - name: Make migrations
