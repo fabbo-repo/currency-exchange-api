@@ -4,6 +4,7 @@ services:
 
   api:
     image: fabbo/currency-conversion-api-djangorest:latest
+    container_name: currency-conversion-api
     env_file:
       - ./currency_conversion_api.env
     volumes:
