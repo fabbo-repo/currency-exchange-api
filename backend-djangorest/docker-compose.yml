@@ -3,7 +3,7 @@ version: '3'
 services:
 
   api:
-    image: fabbo/currency-conversion-api-djangorest
+    image: fabbo/currency-conversion-api-djangorest:latest
     env_file:
       - ./currency_conversion_api.env
     volumes:
