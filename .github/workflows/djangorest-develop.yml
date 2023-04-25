@@ -1,4 +1,4 @@
-name: Django Rest App Build, Test, Upload to Docker Hub and Create Tag
+name: Django Rest App Build and Test
 
 on:
   push:
