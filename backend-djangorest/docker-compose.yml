@@ -18,7 +18,7 @@ services:
       - currency_conversion_api_net
 
   db:
-    image: postgres
+    image: postgres:15.2
     env_file:
       - ./postgres_db.env
     ports:
@@ -30,7 +30,7 @@ services:
       - currency_conversion_api_net
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     env_file:
       - ./pgadmin.env
     ports:
