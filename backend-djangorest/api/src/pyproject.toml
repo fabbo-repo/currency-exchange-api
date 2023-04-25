@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Currency Exchange API"
+name = "Currency Conversion API"
 version = "0.1.0"
 description = ""
 authors = ["FabboMaster"]
