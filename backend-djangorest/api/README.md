@@ -22,7 +22,7 @@
 
 ## Directory tree example
 
-~~~bash
+~~~
 djangorest/
     ├── app_1/
     │   ├── management/
@@ -119,12 +119,6 @@ python manage.py makemigrations
 
 ~~~bash
 python manage.py migrate
-~~~
-
-* Check On Premise settings:
-
-~~~bash
-python manage.py check-on-premise
 ~~~
 
 * Create folder for static files:

@@ -15,7 +15,7 @@ RUN set -ex \
     && rm -rf /var/lib/apt/lists/*
 
 # Install poetry
-RUN pip install poetry
+RUN pip install --upgrade pip && pip install poetry
 
 # Copy dependency files
 # To generate poetry files:
