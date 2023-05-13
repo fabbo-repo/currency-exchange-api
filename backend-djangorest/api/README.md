@@ -4,9 +4,9 @@
 
 | NAME                      | DESCRIPTION                                                |
 | ------------------------- | ---------------------------------------------------------- |
-| APP_DEBUG                 | Debug mode enabled (true|false)                            |
-| APP_ALLOWED_HOSTS         | List of strings representing the allowed host/domain names |
-| APP_CORS_HOSTS            | CORS allowed host/domain names                             |
+| ALLOWED_HOSTS             | List of strings representing the allowed host/domain names |
+| CORS_HOSTS                | CORS allowed host/domain names                             |
+| USE_HTTPS                 | Enable HTTPS (true|false). Default: ***false***            |
 | DATABASE_URL              | Databse url                                                |
 | DEFAULT_API_KEY           | Default value for API Key (uuid)                           |
 | CURRENCY_CODES            | Currency codes allowed (they have to be valid)             |
