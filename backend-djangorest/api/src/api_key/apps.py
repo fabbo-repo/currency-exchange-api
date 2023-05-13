@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from django.db.utils import OperationalError
 import logging
 
 
@@ -23,5 +22,8 @@ class ApiKeyConfig(AppConfig):
                 api_key = APIKey.objects.create()
             else:
                 api_key = APIKey.objects.filter(is_active=True).last()
-            logger.info("API key: " + str(api_key))
-        except Exception: pass
+            print("#"*40)
+            print("API key: " + str(api_key))
+            print("#"*40)
+        except Exception:
+            pass
