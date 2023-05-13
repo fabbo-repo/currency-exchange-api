@@ -9,9 +9,9 @@ from django.core.management.utils import get_random_secret_key
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
-    APP_DEBUG=(bool, os.getenv("APP_DEBUG", default=True)),
-    APP_ALLOWED_HOSTS=(str, os.getenv("APP_ALLOWED_HOSTS", default='*')),
-    APP_CORS_HOSTS=(str, os.getenv("APP_CORS_HOSTS")),
+    ALLOWED_HOSTS=(str, os.getenv("ALLOWED_HOSTS", default='*')),
+    CORS_HOSTS=(str, os.getenv("CORS_HOSTS")),
+    USE_HTTPS=(bool, os.getenv("USE_HTTPS", default=False)),
     DATABASE_URL=(str, os.getenv("DATABASE_URL",
                                  default='sqlite:///'+os.path.join(BASE_DIR, 'default.sqlite3'))),
     DEFAULT_API_KEY=(str, os.getenv("DEFAULT_API_KEY", default="")),
@@ -19,6 +19,7 @@ env = environ.Env(
     MAX_STORED_DAYS=(int, os.getenv("MAX_STORED_DAYS", default=20)),
     MAX_NO_UPDATED_MINS=(int, os.getenv("MAX_NO_UPDATED_MINS", default=60)),
 )
+USE_HTTPS = env("USE_HTTPS")
 
 
 class Dev(Configuration):
@@ -27,13 +28,12 @@ class Dev(Configuration):
 
     SECRET_KEY = get_random_secret_key()
 
-    # True by default but have the option to set it false with an environment variable
-    DEBUG = env('APP_DEBUG')
+    DEBUG = True
 
-    ALLOWED_HOSTS = env('APP_ALLOWED_HOSTS').split(',')
-    if env('APP_CORS_HOSTS'):
+    ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+    if env('CORS_HOSTS'):
         CORS_ALLOW_ALL_ORIGINS = False
-        CORS_ALLOWED_ORIGINS = env('APP_CORS_HOSTS').split(',')
+        CORS_ALLOWED_ORIGINS = env('CORS_HOSTS').split(',')
     else:
         CORS_ALLOW_ALL_ORIGINS = True
     X_FRAME_OPTIONS = 'DENY'
@@ -69,6 +69,7 @@ class Dev(Configuration):
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
+        "corsheaders.middleware.CorsPostCsrfMiddleware",
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -124,6 +125,7 @@ class Dev(Configuration):
     LANGUAGES = (
         ('en', _('English')),
         ('es', _('Spanish')),
+        ("fr", _("French")),
     )
     TIME_ZONE = "UTC"
     # Enables Django’s translation system
@@ -216,57 +218,33 @@ class OnPremise(Dev):
     WSGI_APPLICATION = 'core.wsgi.application'
 
     # Security headers
-    CSRF_COOKIE_SECURE = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+    if USE_HTTPS:
+        CSRF_COOKIE_SECURE = True
+        SESSION_COOKIE_SECURE = True
+        SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+        SECURE_SSL_REDIRECT = True
+        SECURE_HSTS_SECONDS = 31536000  # 1 year
+        SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+        SECURE_HSTS_PRELOAD = True
 
-    if os.path.exists('/var/log/api/app.log'):
-        print("* Using file log")
-        LOGGING = {
-            "version": 1,
-            "disable_existing_loggers": False,
-            "formatters": {
-                "verbose": {
-                    "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
-                    "style": "{",
-                },
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "verbose": {
+                "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+                "style": "{",
             },
-            "handlers": {
-                "logfile": {
-                    "class": "logging.FileHandler",
-                    "filename": "/var/log/api/app.log",
-                    "formatter": "verbose",
-                },
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "stream": "ext://sys.stdout",
+                "formatter": "verbose",
             },
-            "root": {
-                "handlers": ["logfile"],
-                "level": "ERROR",
-            }
+        },
+        "root": {
+            "handlers": ["console"],
+            "level": "ERROR",
         }
-    else:
-        print("* Using console log")
-        LOGGING = {
-            "version": 1,
-            "disable_existing_loggers": False,
-            "formatters": {
-                "verbose": {
-                    "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
-                    "style": "{",
-                },
-            },
-            "handlers": {
-                "console": {
-                    "class": "logging.StreamHandler",
-                    "stream": "ext://sys.stdout",
-                    "formatter": "verbose",
-                },
-            },
-            "root": {
-                "handlers": ["console"],
-                "level": "ERROR",
-            }
-        }
+    }
