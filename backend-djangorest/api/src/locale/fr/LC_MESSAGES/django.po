@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-13 21:54+0200\n"
+"POT-Creation-Date: 2023-05-14 12:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\api_key\models.py:8
-msgid "uuid code"
-msgstr ""
 
-#: .\api_key\models.py:14
+#: .\api_key\authentication.py:33
+msgid "API key without assigned user"
+msgstr "Clé API sans utilisateur attribué"
+
+#: .\api_key\authentication.py:35
+msgid "Unprocessable API key"
+msgstr "Clé API non traitable"
+
+#: .\api_key\authentication.py:36
+msgid "Invalid API key"
+msgstr "Clé API invalide"
+
+#: .\api_key\authentication.py:39
+msgid "APIKey <api_key>"
+msgstr "APIKey <api_key>"
+
+#: .\api_key\models.py:18
+msgid "key"
+msgstr "clé"
+
+#: .\api_key\models.py:24
+msgid "usage left"
+msgstr "utilisation restante"
+
+#: .\api_key\models.py:31
+msgid "API user"
+msgstr "Utilisateur de l'API"
+
+#: .\api_key\models.py:34
 msgid "is active"
 msgstr "c'est actif"
 
-#: .\api_key\models.py:21
+#: .\api_key\models.py:41
 msgid "API key"
-msgstr "API key"
+msgstr "Clé API"
 
-#: .\api_key\models.py:22
+#: .\api_key\models.py:42
 msgid "API keys"
 msgstr "Clés API"
 
@@ -65,15 +90,15 @@ msgstr "Conversion de devises"
 msgid "Currency conversions"
 msgstr "Conversion de devises"
 
-#: .\core\settings.py:126
+#: .\core\settings.py:125
 msgid "English"
 msgstr "Anglais"
 
-#: .\core\settings.py:127
+#: .\core\settings.py:126
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: .\core\settings.py:128
+#: .\core\settings.py:127
 msgid "French"
 msgstr "Français"
 
