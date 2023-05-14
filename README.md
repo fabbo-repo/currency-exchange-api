@@ -1,5 +1,9 @@
 # Currency Conversion API
 
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Python](https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white)
+![Postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+
 Welcome to the Currency Conversion API! This service provides a convenient way to obtain currency conversion rates and historical conversion data for multiple currencies. The API allows you to access real-time exchange rates and retrieve conversion history for a specified time period.
 
 ## Features
@@ -45,8 +49,8 @@ We understand the importance of flexibility, so we are committed to developing m
 
 Our current language versions include:
 
-* [**Python**](./backend-djangorest/README.md)
-* Java. Coming soon...
+* [**Python / DRF**](./backend-djangorest/README.md)
+* Java / Spring Boot. Coming soon...
 
 Please note that we are continuously expanding our language support, so be sure to check our repository for the latest updates.
 
