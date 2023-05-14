@@ -4,9 +4,7 @@ from rest_framework import generics
 from django.utils.translation import gettext_lazy as _
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from rest_framework.permissions import AllowAny
 from django.views.decorators.vary import vary_on_headers
-from api_key.permissions import HasAPIKey
 
 
 class CurrencyRetrieveView(generics.RetrieveAPIView):
