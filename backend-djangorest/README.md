@@ -33,8 +33,6 @@ services:
     volumes:
       - ./logs:/var/log/api
       #- ./certs:/certs:ro  # Uncomment for HTTPS
-    depends_on:
-      - db
     ports:
       - "18070:80"
       #- "18071:443"  # Uncomment for HTTPS
