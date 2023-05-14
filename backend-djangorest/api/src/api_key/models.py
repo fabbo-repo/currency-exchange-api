@@ -2,27 +2,33 @@ from django.db import models
 import uuid
 from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
-from django.core.management.utils import get_random_secret_key
 from django.contrib.auth.models import AbstractUser
 
 
+class ApiUser(AbstractUser):
+    # Fields to iggnore in db form default User model:
+    first_name = None
+    last_name = None
+
+    REQUIRED_FIELDS = []
+
+
 class APIKey(models.Model):
-    code = models.UUIDField(
-        verbose_name=_("uuid code"),
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
     key = models.CharField(
         verbose_name=_("key"),
         max_length=50,
-        default=get_random_secret_key()
+        unique=True
     )
     # An usage left of -1 means no limit
     usage_left = models.IntegerField(
         verbose_name=_("usage left"),
         validators=[MinValueValidator(0)],
         default=-1
+    )
+    user = models.ForeignKey(
+        ApiUser,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("API user")
     )
     is_active = models.BooleanField(
         verbose_name=_("is active"),
@@ -37,19 +43,4 @@ class APIKey(models.Model):
         ordering = ['-created']
 
     def __str__(self) -> str:
-        return str(self.code)
-
-
-class ApiUser(AbstractUser):
-    # Fields to iggnore in db form default User model:
-    first_name = None
-    last_name = None
-    api_key = models.ForeignKey(
-        APIKey,
-        on_delete=models.DO_NOTHING,
-        verbose_name=_("API key"),
-        blank=True,
-        null=True
-    )
-
-    REQUIRED_FIELDS = []
+        return str(self.key)
