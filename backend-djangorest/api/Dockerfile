@@ -59,10 +59,10 @@ RUN python manage.py crontab add
 ENV DJANGO_CONFIGURATION=OnPremise
 ENV WSGI_APLICATION="core.wsgi:application"
 
-# Change to a non-root user
-#USER ${APP_USER}:${APP_USER}
-
 # Entrypoint permissions
 RUN chmod a+x /app/api_entrypoint.sh
+
+# Change to a non-root user
+USER ${APP_USER}:${APP_USER}
 
 ENTRYPOINT ["/app/api_entrypoint.sh"]

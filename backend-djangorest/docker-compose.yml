@@ -9,43 +9,15 @@ services:
       - ./currency_conversion_api.env
     volumes:
       - ./logs:/var/log/api
-      - ./certs:/certs:ro
-    depends_on:
-      - db
+      #- ./certs:/certs:ro  # Uncomment for HTTPS
     ports:
-      - "8070:443"
-    restart: unless-stopped
-    networks:
-      - currency_conversion_api_net
-
-  db:
-    image: postgres:15.2
-    env_file:
-      - ./postgres_db.env
-    ports:
-      - "31700:5432"
-    restart: unless-stopped
-    volumes:
-      - ./database:/var/lib/postgresql/data
-    networks:
-      - currency_conversion_api_net
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    env_file:
-      - ./pgadmin.env
-    ports:
-      - "31750:80"
-    depends_on:
-      - db
+      - "18070:80"
+      #- "18071:443"  # Uncomment for HTTPS
     restart: unless-stopped
     networks:
       - currency_conversion_api_net
 
 networks:
   currency_conversion_api_net:
-    name: currency_conversion_api_net
     ipam:
       driver: default
-      config:
-        - subnet: "192.168.11.0/24"

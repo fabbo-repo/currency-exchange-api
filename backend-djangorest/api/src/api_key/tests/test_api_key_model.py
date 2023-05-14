@@ -10,13 +10,8 @@ from currency.models import Currency
 import secrets
 
 
-class UrlsPermissionsTests(APITestCase):
-    ENDPOINTS = [
-        reverse('conversion-list-by-days', args=[1]),
-        reverse('conversion-by-code', args=['EUR']),
-        reverse('currency-list'),
-        reverse('currency-get', args=['EUR']),
-    ]
+class ApiKeyModelTests(APITestCase):
+    TEST_ENDPOINT = reverse('currency-get', args=['EUR'])
 
     def setUp(self):
         # Avoid WARNING logs while testing wrong requests
@@ -25,7 +20,8 @@ class UrlsPermissionsTests(APITestCase):
         # Global APIKey for testing purposes
         self.api_key = APIKey.objects.create(
             key=secrets.token_urlsafe(30),
-            user=ApiUser.objects.create(username="test")
+            user=ApiUser.objects.create(username="test"),
+            usage_left=3
         )
 
         # Prepare default data
@@ -42,20 +38,27 @@ class UrlsPermissionsTests(APITestCase):
 
         return super().setUp()
 
-    def test_auth_required(self):
+    def test_usage_left(self):
         """
-        Checks all endpoints fails without authorization
+        Checks API key usage left is decreased
         """
-        for endpoint in self.ENDPOINTS:
-            response = test_utils.get(self.client, endpoint)
-            self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.client.credentials(
+            HTTP_AUTHORIZATION='APIKey ' + str(self.api_key.key))
+        response = test_utils.get(self.client, self.TEST_ENDPOINT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        updated_api_key = APIKey.objects.get(key=self.api_key.key)
+        self.assertEqual(2, updated_api_key.usage_left)
 
-    def test_apikey_required(self):
+    def test_no_usage_left(self):
         """
-        Checks all endpoints needs an APIKey
+        Checks API key usage left is decreased
         """
-        for endpoint in self.ENDPOINTS:
-            self.client.credentials(
-                HTTP_AUTHORIZATION='APIKey ' + str(self.api_key.key))
-            response = test_utils.get(self.client, endpoint)
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
+        new_api_key = APIKey.objects.create(
+            key=secrets.token_urlsafe(30),
+            user=ApiUser.objects.create(username="test2"),
+            usage_left=0
+        )
+        self.client.credentials(
+            HTTP_AUTHORIZATION='APIKey ' + str(new_api_key.key))
+        response = test_utils.get(self.client, self.TEST_ENDPOINT)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
