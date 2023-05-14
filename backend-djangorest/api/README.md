@@ -6,9 +6,9 @@
 | ------------------------- | ---------------------------------------------------------- |
 | ALLOWED_HOSTS             | List of strings representing the allowed host/domain names |
 | CORS_HOSTS                | CORS allowed host/domain names                             |
-| USE_HTTPS                 | Enable HTTPS (true|false). Default: ***false***            |
+| USE_HTTPS                 | Enable HTTPS (true or false). Default: ***false***         |
 | DATABASE_URL              | Databse url                                                |
-| DEFAULT_API_KEY           | Default value for API Key (uuid)                           |
+| DEFAULT_API_KEY           | Default value for API Key                                  |
 | CURRENCY_CODES            | Currency codes allowed (they have to be valid)             |
 | MAX_STORED_DAYS           | Max number of days without removing conversions            |
 | MAX_NO_UPDATED_MINS       | Max number of minutos without fetching new conversions     |
