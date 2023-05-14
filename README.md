@@ -63,6 +63,8 @@ To get started with the Currency Conversion API, please follow these steps:
 
 ## Support
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/FabboMaster)
+
 If you have any questions, concerns, or need assistance, please don't hesitate to reach out. We are here to help you make the most of our Currency Conversion API.
 
 Happy coding!
