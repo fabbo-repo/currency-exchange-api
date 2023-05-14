@@ -203,6 +203,8 @@ class Dev(Configuration):
         ('0 */6 * * *', 'conversion.cron.update_currency_conversion')
     ]
 
+    AUTH_USER_MODEL = "api_key.ApiUser"
+
     # Currency conversion settings
 
     CURRENCY_CODES = env('CURRENCY_CODES').split(',')
