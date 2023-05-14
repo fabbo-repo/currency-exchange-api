@@ -83,6 +83,7 @@ djangorest/
     │   ├── settings.py
     │   ├── urls.py
     │   ├── api_urls.py
+    │   ├── authentication.py
     │   ├── exceptions.py
     │   └── wsgi.py
     ├── templates/
@@ -168,6 +169,14 @@ python manage.py loaddata db.json
 ~~~bash
 python manage.py test
 ~~~
+
+* Create API key:
+
+~~~bash
+python manage.py apikey --username <USERNAME> --usage <USAGE>
+~~~
+
+> ***--usage*** is optional, default -1 which means there is no usage limit
 
 * Generate html with coverage report:
 
