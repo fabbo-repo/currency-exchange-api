@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from django.db.utils import OperationalError
 import logging
 
 
@@ -22,6 +21,6 @@ class CurrencyConfig(AppConfig):
                     logger.info("Currency code " +
                                 currency_code + " created")
             # Once currency codes are created, then conversions can be fetched
-            from conversion.cron import update_currency_conversion
-            update_currency_conversion()
+            from conversion.cron import update_currency_conversions
+            update_currency_conversions()
         except Exception: pass
