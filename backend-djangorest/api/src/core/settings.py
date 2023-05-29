@@ -199,7 +199,8 @@ class Dev(Configuration):
 
     # Cron jobs (https://crontab.guru/)
     CRONJOBS = [
-        ('0 */6 * * *', 'conversion.cron.update_currency_conversion')
+        ('0 */6 * * *', 'conversion.cron.update_currency_conversions'),
+        ('0 */14 * * *', 'conversion.cron.delete_currency_conversions')
     ]
 
     AUTH_USER_MODEL = "api_key.ApiUser"

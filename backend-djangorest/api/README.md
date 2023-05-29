@@ -2,16 +2,16 @@
 
 ## Environment Variables
 
-| NAME                      | DESCRIPTION                                                |
-| ------------------------- | ---------------------------------------------------------- |
-| ALLOWED_HOSTS             | List of strings representing the allowed host/domain names |
-| CORS_HOSTS                | CORS allowed host/domain names                             |
-| USE_HTTPS                 | Enable HTTPS (true or false). Default: ***false***         |
-| DATABASE_URL              | Databse url                                                |
-| DEFAULT_API_KEY           | Default value for API Key                                  |
-| CURRENCY_CODES            | Currency codes allowed (they have to be valid)             |
-| MAX_STORED_DAYS           | Max number of days without removing conversions            |
-| MAX_NO_UPDATED_MINS       | Max number of minutos without fetching new conversions     |
+| NAME                      | DESCRIPTION                                                          |
+| ------------------------- | -------------------------------------------------------------------- |
+| ALLOWED_HOSTS             | List of strings representing the allowed host/domain names           |
+| CORS_HOSTS                | CORS allowed host/domain names                                       |
+| USE_HTTPS                 | Enable HTTPS (true or false). Default: ***false***                   |
+| DATABASE_URL              | Databse url                                                          |
+| DEFAULT_API_KEY           | Default value for API Key                                            |
+| CURRENCY_CODES            | Currency codes allowed (they have to be valid)                       |
+| MAX_STORED_DAYS           | Max number of days without removing conversions. Default: 20         |
+| MAX_NO_UPDATED_MINS       | Max number of minutes without saving new conversions. Default: 60    |
 
 ## Error Codes
 
