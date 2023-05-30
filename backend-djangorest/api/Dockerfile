@@ -51,9 +51,6 @@ RUN mkdir -p /var/log/api
 # Compile translations
 RUN django-admin compilemessages --ignore=env
 
-# Create Cron Jobs
-RUN python manage.py crontab add
-
 # Add any custom, static environment variables needed by Django or your settings file here:
 #ENV DJANGO_SETTINGS_MODULE=myapp.settings
 ENV DJANGO_CONFIGURATION=OnPremise
@@ -64,5 +61,8 @@ RUN chmod a+x /app/api_entrypoint.sh
 
 # Change to a non-root user
 USER ${APP_USER}:${APP_USER}
+
+# Create Cron Jobs
+RUN python manage.py crontab add
 
 ENTRYPOINT ["/app/api_entrypoint.sh"]
