@@ -20,7 +20,5 @@ class CurrencyConfig(AppConfig):
                 if created:
                     logger.info("Currency code " +
                                 currency_code + " created")
-            # Once currency codes are created, then conversions can be fetched
-            from conversion.cron import update_currency_conversions
-            update_currency_conversions()
-        except Exception: pass
+        except Exception:
+            pass
