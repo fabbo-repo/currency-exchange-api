@@ -5,8 +5,8 @@ djangorestframework
 django-environ
 # Multiple configurations inside one setting
 django-configurations
-# Django cron jobs
-django-crontab
+# Django jobs scheduler
+django-apscheduler
 # Filtering by url
 django-filter
 # Cors

@@ -50,8 +50,8 @@ class Dev(Configuration):
         # Rest framework:
         'rest_framework',
         'django_filters',
-        # Cron jobs:
-        'django_crontab',
+        # Schedule jobs:
+        'django_apscheduler',
         # Swager:
         'drf_yasg',
         # Custom apps:
@@ -68,7 +68,6 @@ class Dev(Configuration):
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
-        "corsheaders.middleware.CorsPostCsrfMiddleware",
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -197,12 +196,6 @@ class Dev(Configuration):
         }
     }
 
-    # Cron jobs (https://crontab.guru/)
-    CRONJOBS = [
-        ('0 */6 * * *', 'conversion.cron.update_currency_conversions'),
-        ('0 */14 * * *', 'conversion.cron.delete_currency_conversions')
-    ]
-
     AUTH_USER_MODEL = "api_key.ApiUser"
 
     # Currency conversion settings
@@ -246,6 +239,6 @@ class OnPremise(Dev):
         },
         "root": {
             "handlers": ["console"],
-            "level": "ERROR",
+            "level": "INFO",
         }
     }
