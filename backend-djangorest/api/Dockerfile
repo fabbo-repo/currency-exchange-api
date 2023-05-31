@@ -9,7 +9,6 @@ RUN set -ex \
     && BUILD_DEPS=" \
     gettext \
     postgresql-client \
-    cron \
     " \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
@@ -61,8 +60,5 @@ RUN chmod a+x /app/api_entrypoint.sh
 
 # Change to a non-root user
 USER ${APP_USER}:${APP_USER}
-
-# Create Cron Jobs
-RUN python manage.py crontab add
 
 ENTRYPOINT ["/app/api_entrypoint.sh"]
