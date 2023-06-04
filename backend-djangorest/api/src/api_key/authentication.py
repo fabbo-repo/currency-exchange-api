@@ -5,16 +5,16 @@ from django.utils.translation import gettext_lazy as _
 
 
 class ApiKeyAuthentication(authentication.BaseAuthentication):
-    def check_api_key(self, api_key_srt: str) -> APIKey:
+    def check_api_key(self, api_key_srt: str) -> APIKey | None:
         stored_api_keys = APIKey.objects.filter(is_active=True)
         for stored_key in stored_api_keys:
             if str(stored_key.key) == api_key_srt \
-                and stored_key.usage_left != 0 \
-                and stored_key.is_active:
+                    and stored_key.usage_left != 0 \
+                    and stored_key.is_active:
                 return stored_key
         return None
 
-    def get_api_key_srt(self, request):
+    def get_api_key_srt(self, request) -> str | None:
         """
         Get the access api_key str based on a request.
 
@@ -33,7 +33,12 @@ class ApiKeyAuthentication(authentication.BaseAuthentication):
 
     def authenticate(self, request):
         api_key_srt = self.get_api_key_srt(request)
+
+        if not api_key_srt:
+            return None
+
         api_key = self.check_api_key(api_key_srt)
+
         if not api_key:
             raise exceptions.AuthenticationFailed(_("Invalid API key"))
         elif api_key.user:
