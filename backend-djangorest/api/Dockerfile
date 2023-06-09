@@ -41,8 +41,9 @@ RUN mkdir /app/
 WORKDIR /app/
 ADD src /app/
 
-# uWSGI will listen on this port
-EXPOSE 8000
+# gunicorn will listen on this ports
+EXPOSE 80
+EXPOSE 443
 
 # Log directory:
 RUN mkdir -p /var/log/api

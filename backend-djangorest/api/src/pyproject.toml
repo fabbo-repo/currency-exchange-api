@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Currency Conversion API"
-version = "1.0.4"
+version = "1.0.5"
 description = ""
 authors = ["FabboMaster"]
 license = "Apache License 2.0"
