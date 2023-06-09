@@ -46,8 +46,10 @@ $$    $$/ $$    $$/ $$ |  $$ |   $$$/  $$       |$$ |     /     $$/ $$ |$$    $$
                                                                                             
 EOF
 
-# Execute schedule jobs
-python manage.py run-jobs &
+if [ "$RUN_JOBS" = true ]; then
+    # Execute schedule jobs
+    python manage.py run-jobs &
+fi
 
 if [ "$USE_HTTPS" = true ]; then
     exec gunicorn --certfile=/certs/fullchain.pem --keyfile=/certs/privkey.pem \
