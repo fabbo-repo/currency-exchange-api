@@ -6,6 +6,7 @@
 | ------------------------- | -------------------------------------------------------------------- |
 | ALLOWED_HOSTS             | List of strings representing the allowed host/domain names           |
 | CORS_HOSTS                | CORS allowed host/domain names                                       |
+| RUN_JOBS                  | Enable jobs execution (true or false). Default: ***false***          |
 | USE_HTTPS                 | Enable HTTPS (true or false). Default: ***false***                   |
 | DATABASE_URL              | Databse url                                                          |
 | DEFAULT_API_KEY           | Default value for API Key                                            |

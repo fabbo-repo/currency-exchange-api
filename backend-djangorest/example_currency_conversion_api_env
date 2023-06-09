@@ -1,3 +1,4 @@
 ALLOWED_HOSTS=localhost
 DATABASE_URL=postgres://pguser:password@db:34500/currency_conversion_api
 CURRENCY_CODES=USD,EUR,CAD
+RUN_JOBS=true
