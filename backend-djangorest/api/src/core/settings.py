@@ -210,7 +210,7 @@ class Dev(Configuration):
     MAX_NO_UPDATED_MINS = env('MAX_NO_UPDATED_MINS')
 
 
-class OnPremise(Dev):
+class Prod(Dev):
     DEBUG = False
     WSGI_APPLICATION = 'core.wsgi.application'
 
