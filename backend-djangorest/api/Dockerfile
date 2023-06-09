@@ -53,7 +53,7 @@ RUN django-admin compilemessages --ignore=env
 
 # Add any custom, static environment variables needed by Django or your settings file here:
 #ENV DJANGO_SETTINGS_MODULE=myapp.settings
-ENV DJANGO_CONFIGURATION=OnPremise
+ENV DJANGO_CONFIGURATION=Prod
 ENV WSGI_APLICATION="core.wsgi:application"
 
 # Entrypoint permissions
