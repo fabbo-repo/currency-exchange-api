@@ -1,24 +1,15 @@
+import os
 from pathlib import Path
 from configurations import Configuration
-import os
 from django.utils.translation import gettext_lazy as _
-import environ
 from django.core.management.utils import get_random_secret_key
+import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-env = environ.Env(
-    ALLOWED_HOSTS=(str, os.getenv("ALLOWED_HOSTS", default='*')),
-    CORS_HOSTS=(str, os.getenv("CORS_HOSTS")),
-    USE_HTTPS=(bool, os.getenv("USE_HTTPS", default=False)),
-    DATABASE_URL=(str, os.getenv("DATABASE_URL",
-                                 default='sqlite:///'+os.path.join(BASE_DIR, 'default.sqlite3'))),
-    CURRENCY_CODES=(str, os.getenv("CURRENCY_CODES", default='EUR,USD')),
-    MAX_STORED_DAYS=(int, os.getenv("MAX_STORED_DAYS", default=20)),
-    MAX_NO_UPDATED_MINS=(int, os.getenv("MAX_NO_UPDATED_MINS", default=60)),
-)
-USE_HTTPS = env("USE_HTTPS")
+env = environ.Env()
+USE_HTTPS = env.bool("USE_HTTPS", default=False)
 
 
 class Dev(Configuration):
@@ -29,12 +20,22 @@ class Dev(Configuration):
 
     DEBUG = True
 
-    ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
-    if env('CORS_HOSTS'):
+    ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
+
+    # Cors Setup
+    cors_hosts = env.list("CORS_HOSTS", default=[])
+    if cors_hosts:
         CORS_ALLOW_ALL_ORIGINS = False
-        CORS_ALLOWED_ORIGINS = env('CORS_HOSTS').split(',')
+        CORS_ALLOWED_ORIGINS = cors_hosts
     else:
         CORS_ALLOW_ALL_ORIGINS = True
+
+    # Csrf Setup
+    csrf_hosts = env.list("CSRF_HOSTS", default=[])
+    if csrf_hosts:
+        CSRF_TRUSTED_ORIGINS = csrf_hosts
+
+    # X Frame Setup
     X_FRAME_OPTIONS = 'DENY'
 
     # Application definition
@@ -95,7 +96,10 @@ class Dev(Configuration):
 
     # Database
     # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-    DATABASES = {"default": env.db()}
+    DATABASES = {"default": env.db(
+        "DATABASE_URL",
+        default="sqlite:///" + os.path.join(BASE_DIR, "default.sqlite3")
+    )}
 
     # Password validation
     # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -178,14 +182,6 @@ class Dev(Configuration):
         "DEFAULT_FILTER_BACKENDS": [
             "django_filters.rest_framework.DjangoFilterBackend",
         ],
-        "DEFAULT_THROTTLE_CLASSES": [
-            "rest_framework.throttling.AnonRateThrottle",
-            "rest_framework.throttling.UserRateThrottle"
-        ],
-        "DEFAULT_THROTTLE_RATES": {
-            "anon": "300/minute",
-            "user": "300/minute",
-        },
         'EXCEPTION_HANDLER': 'core.exceptions.app_exception_handler'
     }
 
@@ -203,11 +199,11 @@ class Dev(Configuration):
 
     # Currency conversion settings
 
-    CURRENCY_CODES = env('CURRENCY_CODES').split(',')
+    CURRENCY_CODES = env.list("CURRENCY_CODES", default=["EUR", "USD"])
     # Maximum number of days to store a conversion
-    MAX_STORED_DAYS = env('MAX_STORED_DAYS')
+    MAX_STORED_DAYS = env.int("MAX_STORED_DAYS", default=20)
     # Maximum number of minutes to avoid updating a conversion
-    MAX_NO_UPDATED_MINS = env('MAX_NO_UPDATED_MINS')
+    MAX_NO_UPDATED_MINS = env.int("MAX_NO_UPDATED_MINS", default=60)
 
 
 class Prod(Dev):
