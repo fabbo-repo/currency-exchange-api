@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-14 12:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\api_key\authentication.py:33
+msgid "API key without assigned user"
+msgstr "Clé API sans utilisateur attribué"
+
+#: .\api_key\authentication.py:35
+msgid "Unprocessable API key"
+msgstr "Clé API non traitable"
+
+#: .\api_key\authentication.py:36
+msgid "Invalid API key"
+msgstr "Clé API invalide"
+
+#: .\api_key\authentication.py:39
+msgid "APIKey <api_key>"
+msgstr "APIKey <api_key>"
+
+#: .\api_key\models.py:18
+msgid "key"
+msgstr "clé"
+
+#: .\api_key\models.py:24
+msgid "usage left"
+msgstr "utilisation restante"
+
+#: .\api_key\models.py:31
+msgid "API user"
+msgstr "Utilisateur de l'API"
+
+#: .\api_key\models.py:34
+msgid "is active"
+msgstr "c'est actif"
+
+#: .\api_key\models.py:41
+msgid "API key"
+msgstr "Clé API"
+
+#: .\api_key\models.py:42
+msgid "API keys"
+msgstr "Clés API"
+
+#: .\conversion\exceptions.py:12
+msgid "{} code not supported"
+msgstr "code {} non pris en charge"
+
+#: .\conversion\exceptions.py:18
+msgid "Too many days, maximum is {}"
+msgstr "Trop de jours, le maximum est de {}"
+
+#: .\conversion\models.py:9
+msgid "uuid"
+msgstr "uuid"
+
+#: .\conversion\models.py:16
+msgid "currency from"
+msgstr "devise de"
+
+#: .\conversion\models.py:22
+msgid "currency to"
+msgstr "monnaie à"
+
+#: .\conversion\models.py:27
+msgid "conversion value"
+msgstr "valeur de conversion"
+
+#: .\conversion\models.py:33
+msgid "Currency conversion"
+msgstr "Conversion de devises"
+
+#: .\conversion\models.py:34
+msgid "Currency conversions"
+msgstr "Conversion de devises"
+
+#: .\core\settings.py:125
+msgid "English"
+msgstr "Anglais"
+
+#: .\core\settings.py:126
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: .\core\settings.py:127
+msgid "French"
+msgstr "Français"
+
+#: .\currency\models.py:7
+msgid "code"
+msgstr "code"
+
+#: .\currency\models.py:13 .\currency\models.py:14
+msgid "Currency"
+msgstr "Monnaie"

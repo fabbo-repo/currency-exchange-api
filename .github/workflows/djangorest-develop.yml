@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'backend-djangorest/**'
 
 jobs:
   build-test-upload:
@@ -25,29 +23,29 @@ jobs:
           pip install --upgrade pip
           pip install poetry
           poetry install
-        working-directory: ./backend-djangorest/api/src
+        working-directory: ./api/src
 
       - name: Run tests
         run: |
           poetry run python manage.py test
-        working-directory: ./backend-djangorest/api/src
+        working-directory: ./api/src
       
       - name: Check deploy
         run: |
           poetry run python manage.py check --deploy
-        working-directory: ./backend-djangorest/api/src
+        working-directory: ./api/src
       
       - name: Check migrations
         run: |
           poetry run python manage.py makemigrations
-        working-directory: ./backend-djangorest/api/src
+        working-directory: ./api/src
         
       - name: Check build Docker Image
         run: |
           export APP_VERSION=$(grep -m 1 version src/pyproject.toml | tr -d '=' | cut -d' ' -f3 | tr -d '"' | tr -d '\n' | tr -d '\r')
           echo "Using version ${APP_VERSION}"
-          IMAGE_TAG="${DJANGOREST_DOCKER_REPO_NAME}:${APP_VERSION}"
+          IMAGE_TAG="${DOCKER_REPO_NAME}:${APP_VERSION}"
           docker build . -t ${IMAGE_TAG}
         env:
-          DJANGOREST_DOCKER_REPO_NAME: ${{ secrets.DJANGOREST_DOCKER_REPO_NAME }}
-        working-directory: ./backend-djangorest/api
+          DOCKER_REPO_NAME: ${{ secrets.DOCKER_REPO_NAME }}
+        working-directory: ./api

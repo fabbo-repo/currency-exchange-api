@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  currency-conversion-api:
+    image: fabbo/currency-conversion-api:latest
+    container_name: currency-conversion-api
+    env_file:
+      - ./currency_conversion_api.env
+    volumes:
+      - ./logs:/var/log/api
+      #- ./certs:/certs:ro  # Uncomment for HTTPS
+    ports:
+      - "18070:80"
+      #- "18071:443"  # Uncomment for HTTPS
+    restart: unless-stopped
+    networks:
+      - currency-conversion-api-net
+
+networks:
+  currency-conversion-api-net:
