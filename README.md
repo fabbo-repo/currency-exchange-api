@@ -40,19 +40,7 @@ This endpoint returns the latest exchange rates for an specific currency.
 GET /api/v1/conversion/days/<DAYS>
 ~~~
 
-This endpoint returns all stored currency cunversions for a number of days (
-maximum 30).
-
-## Language Versions
-
-We understand the importance of flexibility, so we are committed to developing multiple versions of our service in different programming languages. This will allow you to choose the implementation that best suits your project requirements and preferences.
-
-Our current language versions include:
-
-* [**Python / DRF**](./backend-djangorest/README.md)
-* Java / Spring Boot. Coming soon...
-
-Please note that we are continuously expanding our language support, so be sure to check our repository for the latest updates.
+This endpoint returns all stored currency cunversions for a number of days (maximum 30).
 
 ## Getting Started
 

@@ -1,0 +1,24 @@
+django
+# Rest framework
+djangorestframework
+# Environment variables library
+django-environ
+# Multiple configurations inside one setting
+django-configurations
+# Django jobs scheduler
+django-apscheduler
+# Filtering by url
+django-filter
+# Cors
+django-cors-headers
+# Swagger
+drf-yasg
+# Postgres driver
+psycopg2-binary
+# Testing coverage
+coverage
+# Web server
+gunicorn
+# Web scrapping
+selenium
+webdriver-manager
