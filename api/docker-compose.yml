@@ -3,7 +3,7 @@ version: '3'
 services:
 
   currency-conversion-api:
-    build: .
+    build: fabbo/currency-conversion-api
     container_name: currency-conversion-api
     env_file:
       - ./currency_conversion_api.env
