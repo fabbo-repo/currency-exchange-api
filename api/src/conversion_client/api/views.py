@@ -13,7 +13,7 @@ class ConversionRetrieveView(APIView):
     def get(self, request, code, format=None):
         if code not in settings.CURRENCY_CODES:
             raise CodeNotSupportedException(code)
-        conversions_dict = get_keycloak_client().execute_conversions(code)
+        conversions_dict = get_keycloak_client().make_conversions(code)
         return Response(
             data={
                 "code": code,

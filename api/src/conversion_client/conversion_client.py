@@ -30,6 +30,17 @@ class CurrencyConversionClient(object):
                 conversion_value=requestd_conersion,
             )
 
+    def make_conversions(self, reference_currency_code, ammount=1) -> dict:
+        res = {reference_currency_code: ammount}
+        for code in settings.CURRENCY_CODES:
+            # Ignore reference_currency_code
+            if code == reference_currency_code:
+                continue
+            res[code] = self.make_conversion(
+                reference_currency_code, code, ammount
+            )
+        return res
+
     def make_conversion(self, currency_from: str, currency_to: str, ammount=1) -> float:
         if currency_from == currency_to:
             return ammount
