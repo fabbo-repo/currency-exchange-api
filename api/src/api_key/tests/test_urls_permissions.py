@@ -5,7 +5,7 @@ import core.tests.utils as test_utils
 from django.urls import reverse
 from api_key.models import APIKey, ApiUser
 from django.conf import settings
-from conversion.models import Conversion
+from conversion_client.models import Conversion
 from currency.models import Currency
 import secrets
 

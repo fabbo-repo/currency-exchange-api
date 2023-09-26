@@ -1,5 +1,5 @@
 from django.urls import path
-from conversion.api.views import (
+from conversion_client.api.views import (
     ConversionRetrieveView,
     ConversionDaysListView
 )

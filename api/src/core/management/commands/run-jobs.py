@@ -1,11 +1,10 @@
+import logging
 from django.core.management.base import BaseCommand
 from django.conf import settings
-import logging
+from django_apscheduler.jobstores import DjangoJobStore
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
-from django.core.management.base import BaseCommand
-from django_apscheduler.jobstores import DjangoJobStore
-from conversion.apscheduler import update_currency_conversions, delete_currency_conversions
+from conversion_client.apscheduler import update_currency_conversions, delete_currency_conversions
 
 logger = logging.getLogger(__name__)
 
@@ -27,8 +26,7 @@ class Command(BaseCommand):
         scheduler.add_job(
             update_currency_conversions,
             trigger=CronTrigger(
-                minute="0",
-                hour="*/6"
+                minute=f"*/{settings.MAX_NO_UPDATED_MINS}"
             ),  # https://crontab.guru/
             id="update_currency_conversions",
             max_instances=1,
@@ -38,8 +36,7 @@ class Command(BaseCommand):
         scheduler.add_job(
             delete_currency_conversions,
             trigger=CronTrigger(
-                minute=0,
-                hour="*/14"
+                day=f"*/{settings.MAX_STORED_DAYS}"
             ),  # https://crontab.guru/
             id="delete_old_job_executions",
             max_instances=1,
@@ -51,4 +48,4 @@ class Command(BaseCommand):
         except KeyboardInterrupt:
             pass
         scheduler.shutdown()
-        logger.debug("Scheduler shut down successfully!")
+        logger.info("Scheduler shut down successfully!")

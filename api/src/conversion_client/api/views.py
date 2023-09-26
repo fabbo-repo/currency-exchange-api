@@ -1,12 +1,11 @@
-from conversion.models import Conversion
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
-from conversion.converter import CurrencyConversionService
-from conversion.exceptions import TooManyDaysException, CodeNotSupportedException
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from conversion_client.models import Conversion
+from conversion_client.django_client import get_keycloak_client
+from conversion_client.exceptions import TooManyDaysException, CodeNotSupportedException
 
 
 class ConversionRetrieveView(APIView):
@@ -14,7 +13,7 @@ class ConversionRetrieveView(APIView):
     def get(self, request, code, format=None):
         if code not in settings.CURRENCY_CODES:
             raise CodeNotSupportedException(code)
-        conversions_dict = CurrencyConversionService.make_conversions(code)
+        conversions_dict = get_keycloak_client().execute_conversions(code)
         return Response(
             data={
                 "code": code,

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from conversion.models import Conversion
+from conversion_client.models import Conversion
 
 
 @admin.register(Conversion)

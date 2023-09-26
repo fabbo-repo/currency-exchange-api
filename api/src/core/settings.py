@@ -57,7 +57,7 @@ class Dev(Configuration):
         'drf_yasg',
         # Custom apps:
         'core',
-        'conversion',
+        'conversion_client',
         'currency',
         'api_key'
     ]
@@ -165,7 +165,7 @@ class Dev(Configuration):
         },
         "root": {
             "handlers": ["console"],
-            "level": "DEBUG",
+            "level": "INFO",
         }
     }
 
@@ -203,7 +203,7 @@ class Dev(Configuration):
     # Maximum number of days to store a conversion
     MAX_STORED_DAYS = env.int("MAX_STORED_DAYS", default=20)
     # Maximum number of minutes to avoid updating a conversion
-    MAX_NO_UPDATED_MINS = env.int("MAX_NO_UPDATED_MINS", default=60)
+    MAX_NO_UPDATED_MINS = env.int("MAX_NO_UPDATED_MINS", default=5)
 
 
 class Prod(Dev):

@@ -2,17 +2,17 @@
 
 ## Environment Variables
 
-| NAME                | DESCRIPTION                                                       |
-| ------------------- | ----------------------------------------------------------------- |
-| ALLOWED_HOSTS       | List of strings representing the allowed host/domain names        |
-| CORS_HOSTS          | CORS allowed hosts (url format)                                   |
-| CSRF_HOSTS          | CSRF allowed hosts (url format)                                   |
-| RUN_JOBS            | Enable jobs execution (true or false). Default: ***false***       |
-| USE_HTTPS           | Enable HTTPS (true or false). Default: ***false***                |
-| DATABASE_URL        | Databse url                                                       |
-| CURRENCY_CODES      | Currency codes allowed (they have to be valid)                    |
-| MAX_STORED_DAYS     | Max number of days without removing conversions. Default: 20      |
-| MAX_NO_UPDATED_MINS | Max number of minutes without saving new conversions. Default: 60 |
+| NAME                | DESCRIPTION                                                      |
+| ------------------- | ---------------------------------------------------------------- |
+| ALLOWED_HOSTS       | List of strings representing the allowed host/domain names       |
+| CORS_HOSTS          | CORS allowed hosts (url format)                                  |
+| CSRF_HOSTS          | CSRF allowed hosts (url format)                                  |
+| RUN_JOBS            | Enable jobs execution (true or false). Default: ***false***      |
+| USE_HTTPS           | Enable HTTPS (true or false). Default: ***false***               |
+| DATABASE_URL        | Databse url                                                      |
+| CURRENCY_CODES      | Currency codes allowed (they have to be valid)                   |
+| MAX_STORED_DAYS     | Max number of days without removing conversions. Default: 20     |
+| MAX_NO_UPDATED_MINS | Max number of minutes without saving new conversions. Default: 5 |
 
 ## Error Codes
 
@@ -202,5 +202,5 @@ django-admin compilemessages --ignore=env
 * Execute migrations with docker compose
 
 ~~~bash
-docker-compose run --entrypoint "sh" api -c "python manage.py migrate"
+docker-compose run --entrypoint "sh" currency-conversion-api -c "python manage.py migrate"
 ~~~

@@ -2,9 +2,9 @@ version: '3'
 
 services:
 
-  db:
+  currency-conversion-db:
     image: postgres:15.2
-    container_name: currency-conversion-postgres
+    container_name: currency-conversion-db
     env_file:
       - ./postgres_db.env
     ports:
@@ -13,9 +13,9 @@ services:
     volumes:
       - ./database:/var/lib/postgresql/data
     networks:
-      - currency_conversion_db_net
+      - currency-conversion-db-net
 
-  pgadmin:
+  currency-conversion-pgadmin:
     image: dpage/pgadmin4:latest
     container_name: currency-conversion-pgadmin
     env_file:
@@ -23,12 +23,10 @@ services:
     ports:
       - "34050:80"
     depends_on:
-      - db
+      - currency-conversion-db
     restart: unless-stopped
     networks:
-      - currency_conversion_db_net
+      - currency-conversion-db-net
 
 networks:
-  currency_conversion_db_net:
-    ipam:
-      driver: default
+  currency-conversion-db-net:
