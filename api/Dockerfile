@@ -1,9 +1,5 @@
 FROM python:3.10-slim
 
-# Create a group and user to run our app
-ENV APP_USER=currency_conversion_app_user
-RUN groupadd -r ${APP_USER} && useradd --no-log-init -r -g ${APP_USER} ${APP_USER}
-
 # Install gettext library and psql client to check whether pg db is available
 RUN set -ex \
     && BUILD_DEPS=" \
@@ -86,8 +82,5 @@ ENV WSGI_APLICATION="core.wsgi:application"
 
 # Entrypoint permissions
 RUN chmod a+x /app/api_entrypoint.sh
-
-# Change to a non-root user
-#USER ${APP_USER}:${APP_USER}
 
 ENTRYPOINT ["/app/api_entrypoint.sh"]
