@@ -56,6 +56,20 @@ To get started with the Currency Conversion API, please follow these steps:
 
 3- Start making requests to the API endpoints using your API key.
 
+## Environment Variables
+
+| NAME                | DESCRIPTION                                                      |
+| ------------------- | ---------------------------------------------------------------- |
+| ALLOWED_HOSTS       | List of strings representing the allowed host/domain names       |
+| CORS_HOSTS          | CORS allowed hosts (url format)                                  |
+| CSRF_HOSTS          | CSRF allowed hosts (url format)                                  |
+| RUN_JOBS            | Enable jobs execution (true or false). Default: ***false***      |
+| USE_HTTPS           | Enable HTTPS (true or false). Default: ***false***               |
+| DATABASE_URL        | Databse url                                                      |
+| CURRENCY_CODES      | Currency codes allowed (they have to be valid)                   |
+| MAX_STORED_DAYS     | Max number of days without removing conversions. Default: 20     |
+| MAX_NO_UPDATED_MINS | Max number of minutes without saving new conversions. Default: 5 |
+
 ## Support
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/FabboMaster)
