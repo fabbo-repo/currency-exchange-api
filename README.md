@@ -7,10 +7,10 @@
 Welcome to the Currency Conversion API! This service provides a convenient way to obtain currency conversion rates and historical conversion data for multiple currencies. The API allows you to access real-time exchange rates and retrieve conversion history for a specified time period.
 
 ## Features
+
 * Get real-time exchange rates for a variety of currencies.
 * Convert an amount from one currency to another.
 * Retrieve historical conversion rates for a specific time range.
-* Support for multiple languages and frameworks.
 * Easy integration into your applications and systems.
 * API Endpoints
 * Get Latest Exchange Rates
@@ -48,11 +48,9 @@ To get started with the Currency Conversion API, please follow these steps:
 
 1- Review the API documentation for detailed information on each endpoint and their usage.
 
-2- Choose the language version that suits your project requirements and access the corresponding repository.
+2- Follow the [installation instructions](./api/README.md) and integrate the service into your application.
 
-3- Follow the installation instructions and integrate the service into your application.
-
-4- Start making requests to the API endpoints using your API key.
+3- Start making requests to the API endpoints using your API key.
 
 ## Support
 
