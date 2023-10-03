@@ -1,12 +1,5 @@
 # DRF API
 
-## Error Codes
-
-| CODE | DEFINITION                         | ENDPOINT                |
-| ---- | ---------------------------------- | ----------------------- |
-| 1    | Currency code not supported        | /conversion/{code}      |
-| 2    | Too many days to fetch conversions | /conversion/days/{days} |
-
 ## Directory tree example
 
 ~~~
