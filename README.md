@@ -52,14 +52,6 @@ To get started with the Currency Conversion API, please follow these steps:
 
 3- Start making requests to the API endpoints using your API key.
 
-## Environment Variables
-
-3- Start making requests to the API endpoints using your API key.
-
-## Environment Variables
-
-3- Start making requests to the API endpoints using your API key.
-
 ## Support
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/FabboMaster)
