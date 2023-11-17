@@ -34,9 +34,10 @@ class ConversionDaysListView(APIView):
             return Response(data=[])
         if days > settings.MAX_STORED_DAYS:
             raise TooManyDaysException()
+        now = timezone.now().replace(hour=23, minute=59, second=59, microsecond=99)
         filtered_conversions = Conversion.objects.filter(
-            created_at__lte=timezone.now(),
-            created_at__gt=timezone.now() - timezone.timedelta(days=days)
+            created_at__lte=now,
+            created_at__gt=now - timezone.timedelta(days=days)
         )
         date_ordered_dict = self.conversions_request_to_dict(
             filtered_conversions)

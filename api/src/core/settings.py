@@ -9,6 +9,10 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
+env_file_path = os.path.join(BASE_DIR, 'currency_conversion_api.env')
+if os.path.exists(env_file_path):
+    print("Using API env file")
+    environ.Env.read_env(env_file_path)
 USE_HTTPS = env.bool("USE_HTTPS", default=False)
 
 
