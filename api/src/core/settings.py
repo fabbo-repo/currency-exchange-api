@@ -33,6 +33,7 @@ class Dev(Configuration):
         CORS_ALLOWED_ORIGINS = cors_hosts
     else:
         CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOW_CREDENTIALS = True
 
     # Csrf Setup
     csrf_hosts = env.list("CSRF_HOSTS", default=[])
@@ -181,8 +182,8 @@ class Dev(Configuration):
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticated",
         ],
-        #"DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-        #"PAGE_SIZE": 10,
+        # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+        # "PAGE_SIZE": 10,
         "DEFAULT_FILTER_BACKENDS": [
             "django_filters.rest_framework.DjangoFilterBackend",
         ],
