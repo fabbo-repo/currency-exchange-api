@@ -1,6 +1,9 @@
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from conversion_client.models import Conversion
@@ -10,7 +13,11 @@ from conversion_client.exceptions import TooManyDaysException, CodeNotSupportedE
 
 class ConversionRetrieveView(APIView):
 
+    @method_decorator(cache_page(60))
     def get(self, request, code, format=None):
+        """
+        This view will be cached for 1 minute
+        """
         if code not in settings.CURRENCY_CODES:
             raise CodeNotSupportedException(code)
         conversions_dict = get_keycloak_client().make_conversions(code)
@@ -29,7 +36,13 @@ class ConversionRetrieveView(APIView):
 
 class ConversionDaysListView(APIView):
 
+
+    @method_decorator(cache_page(60 * 60))
+    @method_decorator(vary_on_headers("Authorization"))
     def get(self, request, days, format=None):
+        """
+        This view will be cached for 1 hour
+        """
         if days < 1:
             return Response(data=[])
         if days > settings.MAX_STORED_DAYS:

@@ -1,10 +1,9 @@
-from currency.models import Currency
-from currency.api.serializers import CurrencySerializer
-from rest_framework import generics
 from django.utils.translation import gettext_lazy as _
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_headers
+from rest_framework import generics
+from currency.models import Currency
+from currency.api.serializers import CurrencySerializer
 
 
 class CurrencyRetrieveView(generics.RetrieveAPIView):
@@ -12,7 +11,6 @@ class CurrencyRetrieveView(generics.RetrieveAPIView):
     serializer_class = CurrencySerializer
 
     @method_decorator(cache_page(12 * 60 * 60))
-    @method_decorator(vary_on_headers("Authorization"))
     def get(self, request, *args, **kwargs):
         """
         This view will be cached for 12 hours
@@ -25,7 +23,6 @@ class CurrencyListView(generics.ListAPIView):
     serializer_class = CurrencySerializer
 
     @method_decorator(cache_page(12 * 60 * 60))
-    @method_decorator(vary_on_headers("Authorization"))
     def get(self, request, *args, **kwargs):
         """
         This view will be cached for 12 hours
