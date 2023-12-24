@@ -2,7 +2,7 @@
 name = "currency-conversion-api"
 version = "1.1.6"
 description = ""
-authors = ["fabbo-repo <fscherle98@gmail.com>"]
+authors = ["fabbo-repo"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
