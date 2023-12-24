@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'api/**'
 
 jobs:
   build-test-upload:
@@ -25,23 +23,19 @@ jobs:
           pip install --upgrade pip
           pip install poetry
           poetry install
-        working-directory: ./api/src
 
       - name: Run tests
         run: |
           poetry run python manage.py test
-        working-directory: ./api/src
-      
+
       - name: Check deploy
         run: |
           poetry run python manage.py check --deploy
-        working-directory: ./api/src
-      
+
       - name: Check migrations
         run: |
           poetry run python manage.py makemigrations
-        working-directory: ./api/src
-        
+
       - name: Check build Docker Image
         run: |
           export APP_VERSION=$(grep -m 1 version src/pyproject.toml | tr -d '=' | cut -d' ' -f3 | tr -d '"' | tr -d '\n' | tr -d '\r')
@@ -50,4 +44,3 @@ jobs:
           docker build . -t ${IMAGE_TAG}
         env:
           DOCKER_REPO_NAME: ${{ secrets.DOCKER_REPO_NAME }}
-        working-directory: ./api
