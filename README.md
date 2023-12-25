@@ -72,11 +72,11 @@ services:
     container_name: currency-conversion-api
     env_file:
       - ./currency_conversion_api.env
-    volumes:
+    #volumes:
       #- ./certs:/certs:ro  # Uncomment for HTTPS
     ports:
-      - "18070:80"
-      #- "18071:443"  # Uncomment for HTTPS
+      - "8070:80"
+      #- "8071:443"  # Uncomment for HTTPS
     restart: unless-stopped
     networks:
       - currency-conversion-api-net
