@@ -1,7 +1,7 @@
 import logging
 from django.conf import settings
 from django_apscheduler import util
-from conversion_client.django_client import get_keycloak_client
+from src.conversion_client.django_client import get_keycloak_client
 
 
 logger = logging.getLogger(__name__)

@@ -4,7 +4,7 @@ from django.conf import settings
 from django_apscheduler.jobstores import DjangoJobStore
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
-from conversion_client.apscheduler import update_currency_conversions, delete_currency_conversions
+from src.conversion_client.apscheduler import update_currency_conversions, delete_currency_conversions
 
 logger = logging.getLogger(__name__)
 

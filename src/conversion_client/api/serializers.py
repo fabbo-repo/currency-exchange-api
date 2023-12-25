@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from conversion_client.models import Conversion
+from src.conversion_client.models import Conversion
 
 
 class ConversionSerializer(serializers.ModelSerializer):
