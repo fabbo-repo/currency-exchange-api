@@ -1,9 +1,5 @@
 FROM python:3.10-slim
 
-# Create a group and user to run the api
-ENV APP_USER=cu-conv-api-user
-RUN groupadd -r ${APP_USER} && useradd --no-log-init -r -g ${APP_USER} ${APP_USER}
-
 # Install gettext library and psql client to check whether pg db is available
 RUN set -ex \
     && BUILD_DEPS=" \
@@ -77,8 +73,5 @@ EXPOSE 443
 #ENV DJANGO_SETTINGS_MODULE=myapp.settings
 ENV DJANGO_CONFIGURATION=Prod
 ENV WSGI_APLICATION="src.core.wsgi:application"
-
-# Change to a non-root user
-USER ${APP_USER}:${APP_USER}
 
 ENTRYPOINT ["/app/api_entrypoint.sh"]
