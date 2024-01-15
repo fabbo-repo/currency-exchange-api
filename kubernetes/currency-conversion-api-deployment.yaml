@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-conversion-api-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: currency-conversion-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: currency-conversion-api
+    spec:
+      containers:
+        - name: currency-conversion-api
+          image: fabbo/currency-conversion-api:1.1.6
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ALLOWED_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: currency-conversion-api-configmap
+                  key: allowed-hosts
+            - name: CORS_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: currency-conversion-api-configmap
+                  key: cors-hosts
+            - name: CSRF_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: currency-conversion-api-configmap
+                  key: csrf-hosts
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: currency-conversion-api-secret
+                  key: database-url
+            - name: CURRENCY_CODES
+              valueFrom:
+                configMapKeyRef:
+                  name: currency-conversion-api-configmap
+                  key: currency-codes
+      initContainers:
+        - name: migrate-currency-conversion-api
+          image: fabbo/currency-conversion-api:1.1.6
+          command: [ 'python', 'manage.py', 'migrate' ]

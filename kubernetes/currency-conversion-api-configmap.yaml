@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: currency-conversion-api-configmap
+  namespace: default
+  labels:
+    app: currency-conversion-api
+data:
+  allowed-hosts: '*'
+  cors-hosts: '*'
+  csrf-hosts: '*'
+  currency-codes: 'USD,EUR,CAD'
