@@ -4,7 +4,9 @@
 ![Python](https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white)
 ![Postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
-Welcome to the Currency Conversion API! This service provides a convenient way to obtain currency conversion rates and historical conversion data for multiple currencies. The API allows you to access real-time exchange rates and retrieve conversion history for a specified time period.
+Welcome to the Currency Conversion API! This service provides a convenient way to obtain currency conversion rates and
+historical conversion data for multiple currencies. The API allows you to access real-time exchange rates and retrieve
+conversion history for a specified time period.
 
 ## Features
 
@@ -85,14 +87,14 @@ networks:
   currency-conversion-api-net:
 ~~~
 
-6. Once the containers are up and running, you can access the API at http://localhost:18070/api/v1/currency.
+6. Once the containers are up and running, you can access the API at http://localhost:8070/api/v1/currency.
 
 7. Refer to the API documentation at API Documentation for detailed information on available endpoints and their usage.
 
 ## Environment Variables
 
 | NAME                | DESCRIPTION                                                      |
-| ------------------- | ---------------------------------------------------------------- |
+|---------------------|------------------------------------------------------------------|
 | ALLOWED_HOSTS       | List of strings representing the allowed host/domain names       |
 | CORS_HOSTS          | CORS allowed hosts (url format)                                  |
 | CSRF_HOSTS          | CSRF allowed hosts (url format)                                  |
@@ -106,7 +108,7 @@ networks:
 ## Error Codes
 
 | CODE | DEFINITION                         | ENDPOINT                |
-| ---- | ---------------------------------- | ----------------------- |
+|------|------------------------------------|-------------------------|
 | 1    | Currency code not supported        | /conversion/{code}      |
 | 2    | Too many days to fetch conversions | /conversion/days/{days} |
 
@@ -116,6 +118,12 @@ networks:
 
 ~~~bash
 python manage.py apikey --username <USERNAME> --usage <USAGE>
+~~~
+
+* Init DB with codes:
+
+~~~bash
+python manage.py currency_db_init
 ~~~
 
 * Execute migrations with docker compose
@@ -128,6 +136,7 @@ docker-compose run --entrypoint "sh" currency-conversion-api -c "python manage.p
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/FabboMaster)
 
-If you have any questions, concerns, or need assistance, please don't hesitate to reach out. We are here to help you make the most of our Currency Conversion API.
+If you have any questions, concerns, or need assistance, please don't hesitate to reach out. We are here to help you
+make the most of our Currency Conversion API.
 
 Happy coding!
