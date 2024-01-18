@@ -74,3 +74,5 @@ spec:
                 configMapKeyRef:
                   name: currency-conversion-api-configmap
                   key: currency-codes
+            - name: RUN_JOBS
+              value: "true"
