@@ -43,6 +43,8 @@ spec:
                 configMapKeyRef:
                   name: currency-conversion-api-configmap
                   key: currency-codes
+            - name: RUN_JOBS
+              value: "true"
       initContainers:
         - name: migrate-currency-conversion-api
           image: fabbo/currency-conversion-api:1.1.6
@@ -74,5 +76,3 @@ spec:
                 configMapKeyRef:
                   name: currency-conversion-api-configmap
                   key: currency-codes
-            - name: RUN_JOBS
-              value: "true"
