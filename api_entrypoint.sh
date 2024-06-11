@@ -51,8 +51,8 @@ fi
 if [ "$USE_HTTPS" = true ]; then
     exec gunicorn --certfile=/certs/fullchain.pem --keyfile=/certs/privkey.pem \
         --bind 0.0.0.0:443 --workers 1 --threads 4 \
-        --timeout 0 $WSGI_APLICATION "$@"
+        --log-level=error --timeout 0 $WSGI_APLICATION "$@"
 else
     exec gunicorn --bind 0.0.0.0:80 --workers 1 --threads 4 \
-        --timeout 0 $WSGI_APLICATION "$@"
+        --log-level=error --timeout 0 $WSGI_APLICATION "$@"
 fi
