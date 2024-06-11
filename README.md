@@ -93,17 +93,18 @@ networks:
 
 ## Environment Variables
 
-| NAME                | DESCRIPTION                                                      |
-|---------------------|------------------------------------------------------------------|
-| ALLOWED_HOSTS       | List of strings representing the allowed host/domain names       |
-| CORS_HOSTS          | CORS allowed hosts (url format)                                  |
-| CSRF_HOSTS          | CSRF allowed hosts (url format)                                  |
-| RUN_JOBS            | Enable jobs execution (true or false). Default: ***false***      |
-| USE_HTTPS           | Enable HTTPS (true or false). Default: ***false***               |
-| DATABASE_URL        | Databse url                                                      |
-| CURRENCY_CODES      | Currency codes allowed (they have to be valid)                   |
-| MAX_STORED_DAYS     | Max number of days without removing conversions. Default: 20     |
-| MAX_NO_UPDATED_MINS | Max number of minutes without saving new conversions. Default: 5 |
+| NAME                | DESCRIPTION                                                            |
+|---------------------|------------------------------------------------------------------------|
+| ALLOWED_HOSTS       | List of strings representing the allowed host/domain names. Default: * |
+| CORS_HOSTS          | CORS allowed hosts (url format). Optional                              |
+| CSRF_HOSTS          | CSRF allowed hosts (url format). Optional                              |
+| RUN_JOBS            | Enable jobs execution (true or false). Default: ***false***            |
+| USE_HTTPS           | Enable HTTPS (true or false). Default: ***false***                     |
+| DATABASE_URL        | Databse url                                                            |
+| DEFAULT_API_KEY     | Default Api Key. Optional                                              |
+| CURRENCY_CODES      | Currency codes allowed (they have to be valid)                         |
+| MAX_STORED_DAYS     | Max number of days without removing conversions. Default: 20           |
+| MAX_NO_UPDATED_MINS | Max number of minutes without saving new conversions. Default: 5       |
 
 ## Error Codes
 
@@ -117,7 +118,7 @@ networks:
 * Create API key:
 
 ~~~bash
-python manage.py apikey --username <USERNAME> --usage <USAGE>
+python manage.py apikey --name <NAME> --usage <USAGE>
 ~~~
 
 * Init DB with codes:

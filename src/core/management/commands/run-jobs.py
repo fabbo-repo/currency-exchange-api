@@ -13,7 +13,7 @@ class Command(BaseCommand):
     """
     Will be executed with:
     ~~~
-    python manage.py apikey --usage <USAGE> --username <USERNAME>
+    python manage.py apikey --usage <USAGE> --name <NAME>
     ~~~
     """
 

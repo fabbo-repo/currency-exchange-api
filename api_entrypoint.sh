@@ -39,6 +39,10 @@ $$    $$/ $$    $$/ $$ |  $$ |   $$$/  $$       |$$ |     /     $$/ $$ |$$    $$
                                                                                             
 EOF
 
+python manage.py migrate --noinput
+
+[ -n "$DEFAULT_API_KEY" ] && python manage.py apikey --name default --key "$DEFAULT_API_KEY"
+
 if [ "$RUN_JOBS" = true ]; then
     # Execute schedule jobs
     python manage.py run-jobs &
