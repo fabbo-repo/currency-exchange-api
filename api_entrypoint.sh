@@ -40,6 +40,7 @@ $$    $$/ $$    $$/ $$ |  $$ |   $$$/  $$       |$$ |     /     $$/ $$ |$$    $$
 EOF
 
 python manage.py migrate --noinput
+python manage.py currency_db_init
 
 [ -n "$DEFAULT_API_KEY" ] && python manage.py apikey --name default --key "$DEFAULT_API_KEY"
 
