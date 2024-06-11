@@ -83,9 +83,9 @@ class CurrencyConversionClient(object):
 
         driver = webdriver.Chrome(options=options)
 
-        # Timeouts in seconds (30 minutes)
-        driver.set_script_timeout(30 * 60)
-        driver.set_page_load_timeout(30 * 60)
+        # Timeouts in seconds (3 hours)
+        driver.set_script_timeout(3 * 60 * 60)
+        driver.set_page_load_timeout(3 * 60 * 60)
 
         url = f"{CURRENCY_CONVERTER_URL}?Amount=1&From={currency_from}&To={currency_to}"
         driver.get(url)

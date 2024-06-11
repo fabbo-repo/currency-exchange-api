@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: currency-conversion-api
-          image: fabbo/currency-conversion-api:1.1.6
+          image: fabbo/currency-conversion-api:1.1.11
           imagePullPolicy: IfNotPresent
           env:
             - name: ALLOWED_HOSTS
