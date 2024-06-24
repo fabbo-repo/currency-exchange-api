@@ -38,6 +38,12 @@ RUN set -ex \
 # Install poetry
 RUN pip install --upgrade pip && pip install poetry
 
+# gunicorn will listen on this ports
+EXPOSE 80
+EXPOSE 443
+
+VOLUME /tmp
+
 # Copy dependency files
 # To generate poetry files:
 # cat requirements.txt | xargs -I % sh -c 'poetry add "%"'
@@ -64,10 +70,6 @@ WORKDIR /app/
 COPY manage.py /app/
 COPY api_entrypoint.sh /app/
 ADD src /app/src/
-
-# gunicorn will listen on this ports
-EXPOSE 80
-EXPOSE 443
 
 # Add any custom, static environment variables needed by Django or your settings file here:
 #ENV DJANGO_SETTINGS_MODULE=myapp.settings
